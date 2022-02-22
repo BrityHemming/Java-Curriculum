@@ -1,0 +1,2 @@
+id,name,category,dollars/kilogram
+1,Catalpa,INEDIBLE,0
