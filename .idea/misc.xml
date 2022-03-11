@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/week-02/exercises/hash-exercises/pom.xml" />
+        <option value="$PROJECT_DIR$/week-02/exercises/list-exercises/pom.xml" />
+        <option value="$PROJECT_DIR$/week-02/exercises/stateful-unit-test-exercises/pom.xml" />
+        <option value="$PROJECT_DIR$/week-02/exercises/stateless-unit-test-exercises/pom.xml" />
+        <option value="$PROJECT_DIR$/week-02/assessment/gomoku/pom.xml" />
+        <option value="$PROJECT_DIR$/week-03/exercises/enum-exercises/pom.xml" />
+        <option value="$PROJECT_DIR$/week-03/exercises/unexplained-encounters/pom.xml" />
+        <option value="$PROJECT_DIR$/week-04/exercises/streams-exercises/pom.xml" />
+        <option value="$PROJECT_DIR$/week-04/exercises/temporal-bigdecimal-exercises/pom.xml" />
+        <option value="$PROJECT_DIR$/week-04/assessment/sustainable-foraging/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/week-01/assessment/src/Hotel.java" />
+  </component>
+</project>

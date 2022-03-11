@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="hash-exercises" />
+        <module name="sustainable-foraging" />
+        <module name="temporal-bigdecimal-exercises" />
+        <module name="gomoku" />
+        <module name="list-exercises" />
+        <module name="stateful-unit-test-exercises" />
+        <module name="enum-exercises" />
+        <module name="unexplained-encounters" />
+        <module name="streams-exercises" />
+        <module name="stateless-unit-test-exercises" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="enum-exercises" target="1.11" />
+      <module name="gomoku" target="11" />
+      <module name="hash-exercises" target="1.11" />
+      <module name="list-exercises" target="1.11" />
+      <module name="stateful-unit-test-exercises" target="1.11" />
+      <module name="stateless-unit-test-exercises" target="1.11" />
+      <module name="streams-exercises" target="1.11" />
+      <module name="sustainable-foraging" target="1.11" />
+      <module name="temporal-bigdecimal-exercises" target="1.11" />
+      <module name="unexplained-encounters" target="1.11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

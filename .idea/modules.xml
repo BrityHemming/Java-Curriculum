@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Java-Curriculum.iml" filepath="$PROJECT_DIR$/.idea/Java-Curriculum.iml" />
+      <module fileurl="file://$PROJECT_DIR$/week-03/exercises/enum-exercises/enum-exercises.iml" filepath="$PROJECT_DIR$/week-03/exercises/enum-exercises/enum-exercises.iml" />
+      <module fileurl="file://$PROJECT_DIR$/week-02/assessment/gomoku/gomoku.iml" filepath="$PROJECT_DIR$/week-02/assessment/gomoku/gomoku.iml" />
+      <module fileurl="file://$PROJECT_DIR$/week-02/exercises/hash-exercises/hash-exercises.iml" filepath="$PROJECT_DIR$/week-02/exercises/hash-exercises/hash-exercises.iml" />
+      <module fileurl="file://$PROJECT_DIR$/week-02/exercises/list-exercises/list-exercises.iml" filepath="$PROJECT_DIR$/week-02/exercises/list-exercises/list-exercises.iml" />
+      <module fileurl="file://$PROJECT_DIR$/week-02/exercises/stateful-unit-test-exercises/stateful-unit-test-exercises.iml" filepath="$PROJECT_DIR$/week-02/exercises/stateful-unit-test-exercises/stateful-unit-test-exercises.iml" />
+      <module fileurl="file://$PROJECT_DIR$/week-02/exercises/stateless-unit-test-exercises/stateless-unit-test-exercises.iml" filepath="$PROJECT_DIR$/week-02/exercises/stateless-unit-test-exercises/stateless-unit-test-exercises.iml" />
+      <module fileurl="file://$PROJECT_DIR$/week-04/exercises/streams-exercises/streams-exercises.iml" filepath="$PROJECT_DIR$/week-04/exercises/streams-exercises/streams-exercises.iml" />
+      <module fileurl="file://$PROJECT_DIR$/week-04/assessment/sustainable-foraging/sustainable-foraging.iml" filepath="$PROJECT_DIR$/week-04/assessment/sustainable-foraging/sustainable-foraging.iml" />
+      <module fileurl="file://$PROJECT_DIR$/week-04/exercises/temporal-bigdecimal-exercises/temporal-bigdecimal-exercises.iml" filepath="$PROJECT_DIR$/week-04/exercises/temporal-bigdecimal-exercises/temporal-bigdecimal-exercises.iml" />
+      <module fileurl="file://$PROJECT_DIR$/week-03/exercises/unexplained-encounters/unexplained-encounters.iml" filepath="$PROJECT_DIR$/week-03/exercises/unexplained-encounters/unexplained-encounters.iml" />
+    </modules>
+  </component>
+</project>
