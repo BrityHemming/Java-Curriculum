@@ -1,45 +1,38 @@
 package learn.gomoku;
 import learn.gomoku.game.Stone;
-import java.util.Scanner;
+
 
 public class GameBoard {
-    private final int boardWidth;
+
+    private final int width;
     private final Stone[][] board;
 
-    /**
-     * Creates a game board with the provided width.
-     * @param boardWidth
-     */
-    public GameBoard(int boardWidth) {
-        this.boardWidth = boardWidth;
-        this.board = new Stone[boardWidth][boardWidth];
+   // create game board object
+    public GameBoard(int width) {
+        this.width = width;
+        this.board = new Stone[width][width];
     }
 
-    /**
-     * Places a stone on the game board.
-     * @param stone The stone to place.
-     */
+    // write method to place a stone on the board by row and column
     public void placeStone(Stone stone) {
         board[stone.getRow()][stone.getColumn()] = stone;
     }
 
-    /**
-     * Renders the game board.
-     */
-    public void render() {
-        renderColumnLabels();
+    // render board by invoking row and column
+    public void renderBoard() {
+        renderColumns();
         renderRows();
     }
 
-    private void renderColumnLabels() {
+    private void renderColumns() {
         System.out.println();
 
-        // add extra whitespace for the first column to make room for the row labels
+        // add extra whitespace
         System.out.print("  ");
-
-        for (int columnIndex = 0; columnIndex < boardWidth; columnIndex++) {
+    // loop through all the columns and print
+        for (int columnNum = 0; columnNum < width; columnNum++) {
             // print the column label
-            System.out.printf(" %02d", columnIndex + 1);
+            System.out.printf(" %02d", columnNum + 1);
         }
 
         // print a new line at the end of the last column
@@ -47,16 +40,20 @@ public class GameBoard {
     }
 
     private void renderRows() {
-        // print rows
-        for (int rowIndex = 0; rowIndex < boardWidth; rowIndex++) {
+        // loop through rows and print
+        for (int rowNum = 0; rowNum < width; rowNum++) {
             // print the row label
-            System.out.printf("%02d", rowIndex + 1);
+            System.out.printf("%02d", rowNum + 1);
 
-            for (int columnIndex = 0; columnIndex < boardWidth; columnIndex++) {
-                Stone stone = board[rowIndex][columnIndex];
-
+            for (int columnNum = 0; columnNum < width; columnNum++) {
+                Stone stone = board[rowNum][columnNum];
+                // If there is a stone, place the stone, else place a "  _"
                 if (stone != null) {
-                    System.out.printf("  %s", stone.isBlack() ? 'X' : 'O');
+                    if(stone.isBlack()){
+                        System.out.print("  X");
+                    }else if(!stone.isBlack()){
+                        System.out.print("  O");
+                    }
                 } else {
                     System.out.print("  _");
                 }

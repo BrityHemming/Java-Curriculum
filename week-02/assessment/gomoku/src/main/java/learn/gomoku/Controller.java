@@ -5,7 +5,6 @@ import learn.gomoku.game.Stone;
 import learn.gomoku.players.Player;
 import learn.gomoku.players.HumanPlayer;
 import learn.gomoku.players.RandomPlayer;
-import learn.gomoku.GameBoard;
 import java.util.Scanner;
 
 
@@ -22,8 +21,8 @@ public Controller(Scanner console) {
 // starts game. If the game is over, asks the user if they would like to play again
     @Override
     public void setUp() {
-        System.out.println("Welcome to Gomoku");
-        System.out.println("********************");
+        System.out.println("Gomoku");
+        System.out.println("**********************");
         System.out.println();
 
         do {
@@ -92,7 +91,7 @@ public Controller(Scanner console) {
             Stone stone = getMove(game, currentPlayer);
             gameBoard.placeStone(stone);
 
-            gameBoard.render();
+            gameBoard.renderBoard();
         }
 
         Player winner = game.getWinner();
@@ -107,17 +106,17 @@ public Controller(Scanner console) {
         Stone stone;
         Result result;
 
-        // prompt the player for their move until the result is successful
+        // prompt the player their choice, if their choice is not successful continue to prompt
         do {
-            // attempt to generate a move
+            // make a move
             stone = currentPlayer.generateMove(game.getStones());
 
             // human players will always return `null` for generated moves
             if (stone == null) {
-                System.out.print("Enter a row: ");
+                System.out.print("Choose your row: ");
                 int row = Integer.parseInt(console.nextLine()) - 1;
 
-                System.out.print("Enter a column: ");
+                System.out.print("Choose your column: ");
                 int column = Integer.parseInt(console.nextLine()) - 1;
 
                 // instantiate a stone using the player's provided row and column
@@ -131,21 +130,16 @@ public Controller(Scanner console) {
             // place the stone in the game
             result = game.place(stone);
 
-            // check to make sure that the result was successful
+            // check to make sure that the result was successful if it was not successful prompt the player to choose again
             if (!result.isSuccess()) {
                 System.out.println();
-                System.out.printf("[Err]: %s%n", result.getMessage());
+                System.out.printf("Sorry, that space has already been chosen, please choose again: %s%n", result.getMessage());
                 System.out.println();
             }
         } while (!result.isSuccess());
 
         return stone;
     }
-    @Override
-    public void printBoard() {
-
-    }
-
 
     @Override
     public boolean playAgain() {
@@ -153,7 +147,7 @@ public Controller(Scanner console) {
         String confirmation = console.nextLine();
         System.out.println();
 
-        // only replay if the user entered a "y" (lower or upper cased)
+        // only replay if the user entered a "yes" (lower or upper case)
         return !confirmation.equalsIgnoreCase("yes");
     }
 }
