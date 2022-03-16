@@ -1,18 +1,21 @@
 package models;
 
 public class Panel {
-    // Fields
+    // fields
     private int id;
     private String section;
     private int row;
     private int column;
     private int yearInstalled;
-    private Materials material;
+    private PanelMaterial material;
     private boolean isTracking;
     private PanelKey key;
 
-    // Constructor
-    public Panel(int id, String section, int row, int column, int yearInstalled, Materials material, boolean isTracking){
+    // constuctors
+    public Panel(){
+
+    }
+    public Panel(int id, String section, int row, int column, int yearInstalled, PanelMaterial material, boolean isTracking){
         this.id = id;
         this.section = section;
         this.row = row;
@@ -23,68 +26,73 @@ public class Panel {
         this.key = new PanelKey(section, row, column);
     }
 
-// Getters
+    // Getters and Setters
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getSection() {
         return section;
     }
 
+    public void setSection(String section) {
+        this.section = section;
+        this.key = new PanelKey(section, this.row, this.column);
+    }
+
     public int getRow() {
         return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+        this.key = new PanelKey(this.section, row, this.column);
     }
 
     public int getColumn() {
         return column;
     }
 
-    public int getYearInstalled() {
-        return yearInstalled;
-    }
-
-    public Materials getMaterial() {
-        return material;
-    }
-
-    public boolean isTracking() {
-        return isTracking;
-    }
-
-    public PanelKey getKey() {
-        return key;
-    }
-// Setters
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setSection(String section) {
-        this.section = section;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
-    }
-
     public void setColumn(int column) {
         this.column = column;
+        this.key = new PanelKey(section, this.row, column);
+    }
+
+    public int getYearInstalled() {
+        return yearInstalled;
     }
 
     public void setYearInstalled(int yearInstalled) {
         this.yearInstalled = yearInstalled;
     }
 
-    public void setMaterial(Materials material) {
+    public PanelMaterial getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(PanelMaterial material) {
         this.material = material;
+    }
+
+    public boolean isTracking() {
+        return isTracking;
     }
 
     public void setTracking(boolean tracking) {
         isTracking = tracking;
     }
 
-    public void setKey(PanelKey key) {
-        this.key = key;
+    public PanelKey getKey() {
+        return key;
     }
+
+    // will use to find by key
+    public boolean isMatch(PanelKey key){
+        return this.key.equals(key);
+    }
+
 }
