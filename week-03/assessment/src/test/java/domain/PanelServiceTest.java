@@ -7,6 +7,7 @@ import models.PanelMaterial;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.xml.crypto.Data;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -166,7 +167,6 @@ class PanelServiceTest {
         assertFalse(result.isSuccess());
     }
     //No duplicates
-    // TEST NOT WORKING - WILL NEED TO REVISIT
     @Test
     void shouldNotCreateDuplicate() throws DataAccessException {
 
@@ -188,7 +188,26 @@ class PanelServiceTest {
     }
 
     ////////////////////////////////////////   UPDATE  ////////////////////////////////////////////////
-
+    @Test
+    void shouldUpdate() throws DataAccessException{
+        PanelResult result = service.update(new Panel(2, "South", 8, 8, 2020, PanelMaterial.POLY_SI, true));
+        assertTrue(result.isSuccess());
+    }
+    @Test
+    void shouldNotUpdateSection() throws DataAccessException {
+        PanelResult result = service.update(new Panel(2, "North", 8, 8, 2020, PanelMaterial.POLY_SI, true));
+        assertFalse(result.isSuccess());
+    }
+    @Test
+    void shouldNotUpdateRow() throws DataAccessException {
+        PanelResult result = service.update(new Panel(2, "South", 9, 8, 2020, PanelMaterial.POLY_SI, true));
+        assertFalse(result.isSuccess());
+    }
+    @Test
+    void shouldNotUpdateColumn() throws DataAccessException {
+        PanelResult result = service.update(new Panel(2, "South", 8, 6, 2020, PanelMaterial.POLY_SI, true));
+        assertFalse(result.isSuccess());
+    }
 
     ////////////////////////////////////////   DELETE  ////////////////////////////////////////////////
 }

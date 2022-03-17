@@ -28,7 +28,7 @@ public class PanelService {
     save panel
     success or failure message
     * */
-
+// ADD
     public PanelResult add(Panel panel) throws DataAccessException {
         PanelResult result = validateInputs(panel);
         if (panel != null && panel.getId() > 0) {
@@ -38,6 +38,45 @@ public class PanelService {
         if (result.isSuccess()) {
             panel = repo.add(panel);
             result.setPanel(panel);
+        }
+
+        return result;
+    }
+
+    // UPDATE
+
+    public PanelResult update(Panel panel) throws DataAccessException{
+        PanelResult result = validateInputs(panel);
+        if(!result.isSuccess()){
+            return result;
+        }
+        if (panel.getId() <= 0) {
+            result.addErrorMessage("id is required.");
+            return result;
+        }
+        // cannot update section row or column or ID
+        Panel existing = repo.findById(panel.getId());
+        if(existing == null){
+            result.addErrorMessage("id does not exist: ");
+            return result;
+        }
+        if(existing.getRow() != panel.getRow()){
+            result.addErrorMessage("Cannot update row");
+
+        }
+        if(!existing.getSection().equalsIgnoreCase(panel.getSection())){
+            result.addErrorMessage("Cannot update section");
+
+        }
+        if(existing.getColumn() != panel.getColumn()){
+            result.addErrorMessage("Cannot update column");
+
+        }
+        if(result.isSuccess()){
+            boolean success = repo.update(panel);
+            if(!success){
+                result.addErrorMessage("Could not find panel");
+            }
         }
 
         return result;

@@ -90,7 +90,7 @@ public class PanelFileRepo implements PanelRepo {
 
 
     // ADD
-    // hand the repo an Panel and receive a Panel back
+    // hand the repo a Panel and receive a Panel back
     @Override
     public Panel add(Panel panel) throws DataAccessException {
        // grab all panels

@@ -12,42 +12,23 @@ public class PanelRepoDouble implements PanelRepo{
     private ArrayList<Panel> panels = new ArrayList<>();
 
     public PanelRepoDouble(){
-        Panel testOne = new Panel();
-        testOne.setId(1);
-        testOne.setRow(5);
-        testOne.setColumn(9);
-        testOne.setSection("West");
-        testOne.setTracking(true);
-        testOne.setMaterial(PanelMaterial.CD_TE);
-        testOne.setYearInstalled(2011);
+        Panel testOne = new Panel(1,"North",5,6,2018,PanelMaterial.MONO_SI,true );
+        Panel testTwo = new Panel(2, "South", 8, 8, 2010, PanelMaterial.POLY_SI, true);
+        Panel testThree = new Panel(3,"East",35,10,2018,PanelMaterial.CD_TE,true );
+        Panel testFour = new Panel(4,"West",54,36,2018,PanelMaterial.CIGS,true );
+        Panel testFive = new Panel(5,"North",105,26,2018,PanelMaterial.MONO_SI,true );
         panels.add(testOne);
-
-        Panel testTwo = new Panel();
-        testTwo.setId(2);
-        testTwo.setRow(8);
-        testTwo.setColumn(8);
-        testTwo.setSection("South");
-        testTwo.setTracking(true);
-        testTwo.setMaterial(PanelMaterial.CD_TE);
-        testTwo.setYearInstalled(2019);
         panels.add(testTwo);
-
-        Panel testThree = new Panel();
-        testThree.setId(3);
-        testThree.setRow(8);
-        testThree.setColumn(8);
-        testThree.setSection("East");
-        testThree.setTracking(true);
-        testThree.setMaterial(PanelMaterial.CD_TE);
-        testThree.setYearInstalled(2020);
+        panels.add(testThree);
+        panels.add(testFour);
+        panels.add(testFive);
     }
 
 
 
     @Override
     public Panel findById(int id) throws DataAccessException {
-        ArrayList<Panel> result = new ArrayList<>();
-        for(Panel p : result){
+        for(Panel p : panels){
             if(p.getId() == id){
                 return p;
             }
@@ -73,13 +54,13 @@ public class PanelRepoDouble implements PanelRepo{
 
     @Override
     public boolean update(Panel panel) throws DataAccessException {
-        Panel existingSolarPanel = null;
+        Panel existingPanel = null;
         for (Panel p : panels) {
             if (p.getId() == panel.getId()) {
-                existingSolarPanel = p;
+                existingPanel = p;
             }
         }
-        return existingSolarPanel != null;
+        return existingPanel != null;
     }
 
     @Override
