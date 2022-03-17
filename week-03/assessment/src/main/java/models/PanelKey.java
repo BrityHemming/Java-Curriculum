@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Objects;
+
 public class PanelKey {
     // fields
     private String section;
@@ -37,5 +39,28 @@ public class PanelKey {
         this.column = column;
     }
 
+// borrowed methods below from James solution
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        PanelKey that = (PanelKey) o;
+        return row == that.row &&
+                column == that.column &&
+                section.equalsIgnoreCase(that.section);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(section, row, column);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s-%s-%s", section, row, column);
+    }
 }

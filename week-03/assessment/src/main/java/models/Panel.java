@@ -49,6 +49,10 @@ public class Panel {
     }
 
     public void setRow(int row) {
+        // row must be a number between 0 and 250
+        if(this.row < 0 || this.row > 250){
+            System.out.println("row must be between 0 and 250");
+        }
         this.row = row;
         this.key = new PanelKey(this.section, row, this.column);
     }
@@ -58,6 +62,10 @@ public class Panel {
     }
 
     public void setColumn(int column) {
+        // column must be a number between 0 and 250
+        if(this.column < 0 || this.column > 250){
+            System.out.println("column must be between 0 and 250");
+        }
         this.column = column;
         this.key = new PanelKey(section, this.row, column);
     }

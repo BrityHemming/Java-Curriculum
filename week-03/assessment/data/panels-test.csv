@@ -1,5 +1,6 @@
 id,Section,Row,Column,Material,Year,isTracking
 1,West,2,3,POLY_SI,2011,true
+2,East,3,3,POLY_SI,2011,true
 3,South,64,33,POLY_SI,2011,true
 4,North,9,23,POLY_SI,2011,false
 5,West,8,32,POLY_SI,2011,true

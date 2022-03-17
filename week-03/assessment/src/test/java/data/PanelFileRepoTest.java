@@ -31,7 +31,7 @@ class PanelFileRepoTest {
 
     //TESTS START HERE
     @Test
-    void shouldFindFivePanel(){
+    void shouldFindFivePanel() throws DataAccessException {
         List<Panel> actual = repo.findAll();
         assertNotNull(actual);
         assertEquals(5, actual.size());
@@ -39,32 +39,39 @@ class PanelFileRepoTest {
 
     // test find by id method
     @Test
-    void shouldFindExisitingPanel(){
+    void shouldFindExisitingPanel() throws DataAccessException {
         Panel four = repo.findById(4);
         assertNotNull(four);
         assertEquals("North", four.getSection());
     }
 
     @Test
-    void ShouldNotFindNonExistingPanel(){
+    void ShouldNotFindNonExistingPanel() throws DataAccessException {
         Panel nope = repo.findById(900);
             assertNull(nope);
     }
 
     // Find by Key Tests
-//    @Test
-//    void shouldFindByKey(){
-//        Panel result = repo.findByKey(new PanelKey("West", 2, 3));
-//        assertNotNull(result);
-//        //assertEquals(PanelMaterial.POLY_SI, result.getMaterial());
-//    }
+    @Test
+    void shouldFindByKey() throws DataAccessException {
+        Panel result = repo.findByKey(new PanelKey("West", 2, 3));
+        assertNotNull(result);
+        assertEquals(PanelMaterial.POLY_SI, result.getMaterial());
+        assertEquals(1, result.getId());
+    }
+
+    @Test
+    void shouldNotNonExistingKey() throws DataAccessException {
+        Panel nope = repo.findByKey(new PanelKey("Upstream", 5, 7));
+        assertNull(nope);
+    }
 
     // Find By Section
     @Test
-    void shouldFindExistingSection(){
+    void shouldFindExistingSection() throws DataAccessException {
         List<Panel> west = repo.findBySection("West");
         assertNotNull(west);
-//        assertEquals(2, west.size());
+        assertEquals(2, west.size());
     }
 
 //ADD
@@ -130,5 +137,8 @@ class PanelFileRepoTest {
         boolean actual = repo.deleteById(100000);
         assertFalse(actual);
     }
+
+
+
 
 }// closes class

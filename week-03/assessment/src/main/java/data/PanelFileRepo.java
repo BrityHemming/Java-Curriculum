@@ -3,10 +3,8 @@ import models.Panel;
 import models.PanelKey;
 import models.PanelMaterial;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
+import javax.xml.crypto.Data;
+import java.io.*;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,7 @@ import java.util.List;
 import static java.lang.Integer.parseInt;
 
 
-public class PanelFileRepo {
+public class PanelFileRepo implements PanelRepo {
     // don't want to hardcode file paths here - we want to be flexible
     private final String filePath;
 
@@ -22,8 +20,9 @@ public class PanelFileRepo {
         this.filePath = filePath;
     }
 
-    //Read Operations
-    public List<Panel> findAll(){
+ //READ OPERATIONS
+    @Override
+    public List<Panel> findAll() throws DataAccessException {
         ArrayList<Panel> result = new ArrayList<>();
         // try with resources will close closable resources after the block
         try(BufferedReader reader = new BufferedReader(new FileReader(filePath))){
@@ -46,14 +45,18 @@ public class PanelFileRepo {
                     result.add(panel);
                 }
             }
-        }catch(IOException ex){
-            // do nothing
+        }catch(FileNotFoundException ex){
+            // okay to ignore
+        }
+        catch(IOException ex){
+            throw new DataAccessException(ex.getMessage(), ex);
         }
         return result;
     }
-
-    // find panel by id
-    public Panel findById(int id){
+//FIND METHODS
+// FIND PANEL BY ID
+    @Override
+    public Panel findById(int id) throws DataAccessException {
         for(Panel p : findAll()){
             if(p.getId() == id){
                 return p;
@@ -61,31 +64,34 @@ public class PanelFileRepo {
         }
         return null;
     }
-
-    public List<Panel> findBySection(String section){
+// FIND PANEL BY SECTION
+    @Override
+    public List<Panel> findBySection(String section) throws DataAccessException {
         ArrayList<Panel> result = new ArrayList<>();
         for(Panel p : findAll()){
-            if(p.getSection() == section){
+            if(p.getSection().equalsIgnoreCase(section)){
                 result.add(p);
             }
         }
         return result;
     }
 
-    // find panel by key
-//    public Panel findByKey(PanelKey key){
-//        List<Panel> result = findAll();
-//        for(Panel p : result){
-//            if(p.isMatch(key)){
-//                return p;
-//            }
-//        }
-//        return null;
-//    }
+     //find panel by key
+    @Override
+    public Panel findByKey(PanelKey key) throws DataAccessException {
+        List<Panel> result = findAll();
+        for(Panel p : result){
+            if(p.isMatch(key)){
+                return p;
+            }
+        }
+        return null;
+    }
 
 
     // ADD
     // hand the repo an Panel and receive a Panel back
+    @Override
     public Panel add(Panel panel) throws DataAccessException {
        // grab all panels
         List<Panel> all = findAll();
@@ -106,6 +112,7 @@ public class PanelFileRepo {
 
     // UPDATE
     // we want to see if this was successful
+    @Override
     public boolean update(Panel panel) throws DataAccessException {
         //look for existing panel - if it exists update it
         List<Panel> all = findAll();
@@ -121,6 +128,7 @@ public class PanelFileRepo {
 
     // DELETE
     // we want to see if this was successful
+    @Override
     public boolean deleteById(int id) throws DataAccessException {
         List<Panel> all = findAll();
         for(int i = 0; i < all.size(); i++){
