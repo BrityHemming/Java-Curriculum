@@ -21,7 +21,7 @@ public class PanelFileRepo implements PanelRepo {
     }
 
  //READ OPERATIONS
-    @Override
+
     public List<Panel> findAll() throws DataAccessException {
         ArrayList<Panel> result = new ArrayList<>();
         // try with resources will close closable resources after the block
@@ -141,6 +141,9 @@ public class PanelFileRepo implements PanelRepo {
         return false;
     }
 
+    public boolean deleteByKey(PanelKey key) throws DataAccessException {
+        return findByKey(key) != null;
+    }
 
     // method to save for all data transforming
     private void writeAll(List<Panel> panels) throws DataAccessException {

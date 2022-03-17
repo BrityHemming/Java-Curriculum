@@ -31,13 +31,15 @@ public class PanelService {
 
     public PanelResult add(Panel panel) throws DataAccessException {
         PanelResult result = validateInputs(panel);
-        if(!result.isSuccess()){
-            return result;
+        if (panel != null && panel.getId() > 0) {
+            result.addErrorMessage("Panel `id` should not be set.");
         }
-        result = validateDomain(panel);
-        if(!result.isSuccess()){
-            return result;
+
+        if (result.isSuccess()) {
+            panel = repo.add(panel);
+            result.setPanel(panel);
         }
+
         return result;
     }
 
@@ -47,15 +49,16 @@ public class PanelService {
             result.addErrorMessage("Panel cannot be null");
             return result;
         }
+
         // section must not be null
         if(panel.getSection() == null || panel.getSection().trim().length() == 0){
             result.addErrorMessage("The Section is required");
         }
         // row and column need to be between 0 and 250
-        if(panel.getRow() < 0 || panel.getRow() > 250){
+        if(panel.getRow() <= 0 || panel.getRow() > 250){
             result.addErrorMessage("Row must be between 0 and 250");
         }
-        if(panel.getColumn() < 0 || panel.getColumn() > 250){
+        if(panel.getColumn() <= 0 || panel.getColumn() > 250){
             result.addErrorMessage("Column must be between 0 and 250");
         }
         // year installed must be in the past
@@ -72,6 +75,7 @@ public class PanelService {
         if(panel.isTracking() == false){
             result.addErrorMessage("tracking is required");
         }
+
         //The combined values of Section, Row, and Column may not be duplicated.
         if (result.isSuccess()) {
             Panel existingPanel = repo.findByKey(panel.getKey());
@@ -84,10 +88,5 @@ public class PanelService {
         return result;
     }
 
-    private PanelResult validateDomain(Panel panel) throws DataAccessException {
-        PanelResult result = new PanelResult();
-        List<Panel> allPanels = repo.findAll();
 
-        return result;
-    }
 }// this closes class

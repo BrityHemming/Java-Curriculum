@@ -6,9 +6,6 @@ import models.PanelKey;
 import java.util.List;
 
 public interface PanelRepo {
-    //READ OPERATIONS
-    List<Panel> findAll() throws DataAccessException;
-
     //FIND METHODS
     // FIND PANEL BY ID
     Panel findById(int id) throws DataAccessException;

@@ -4,6 +4,7 @@ import data.DataAccessException;
 import data.PanelRepoDouble;
 import models.Panel;
 import models.PanelMaterial;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -11,24 +12,31 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PanelServiceTest {
-    PanelService service = new PanelService(new PanelRepoDouble());
+    PanelService service;
+
+    @BeforeEach
+    void setup() {
+        PanelRepoDouble repo = new PanelRepoDouble();
+        service = new PanelService(repo);
+    }
 
     // Input validation tests
 ////////////////////////////////////////   ADD ////////////////////////////////////////////////
     @Test
     void shouldAddPanel() throws DataAccessException {
         Panel testOne = new Panel();
-        testOne.setId(1);
-        testOne.setRow(5);
+        testOne.setRow(8);
         testOne.setColumn(9);
-        testOne.setSection("West");
+        testOne.setSection("South");
         testOne.setTracking(true);
         testOne.setMaterial(PanelMaterial.CD_TE);
         testOne.setYearInstalled(2011);
 
         PanelResult result = service.add(testOne);
 
+        assertNotNull(result.getPanel());
         assertTrue(result.isSuccess());
+
     }
     // Null Panel
     @Test
@@ -42,7 +50,6 @@ class PanelServiceTest {
     @Test
     void shouldNotAddNullSection() throws DataAccessException {
         Panel testOne = new Panel();
-        testOne.setId(1);
         testOne.setRow(55);
         testOne.setColumn(9);
         testOne.setSection(null);
@@ -59,7 +66,6 @@ class PanelServiceTest {
     @Test
     void shouldNotAddBlankSection() throws DataAccessException {
         Panel testOne = new Panel();
-        testOne.setId(1);
         testOne.setRow(-5);
         testOne.setColumn(9);
         testOne.setSection("");
@@ -78,7 +84,6 @@ class PanelServiceTest {
     @Test
     void shouldNotAddInvalidRow() throws DataAccessException {
         Panel testOne = new Panel();
-        testOne.setId(1);
         testOne.setRow(-5);
         testOne.setColumn(9);
         testOne.setSection("West");
@@ -96,7 +101,6 @@ class PanelServiceTest {
     @Test
     void shouldNotAddInvalidColumn() throws DataAccessException {
         Panel testOne = new Panel();
-        testOne.setId(1);
         testOne.setRow(5);
         testOne.setColumn(330);
         testOne.setSection("West");
@@ -117,7 +121,6 @@ class PanelServiceTest {
     @Test
     void shouldNotAddNullMaterial() throws DataAccessException {
         Panel testOne = new Panel();
-        testOne.setId(1);
         testOne.setRow(5);
         testOne.setColumn(9);
         testOne.setSection("West");
@@ -137,7 +140,6 @@ class PanelServiceTest {
         Date today = new Date();
         int year = today.getYear() + 1900;
         Panel testOne = new Panel();
-        testOne.setId(1);
         testOne.setRow(5);
         testOne.setColumn(9);
         testOne.setSection("West");
@@ -152,7 +154,6 @@ class PanelServiceTest {
     @Test
     void yearShouldBeAfterEighty() throws DataAccessException {
         Panel testOne = new Panel();
-        testOne.setId(1);
         testOne.setRow(5);
         testOne.setColumn(9);
         testOne.setSection("West");
@@ -165,19 +166,11 @@ class PanelServiceTest {
         assertFalse(result.isSuccess());
     }
     //No duplicates
+    // TEST NOT WORKING - WILL NEED TO REVISIT
     @Test
-    void shouldNotCreatDuplicate() throws DataAccessException {
-        Panel testOne = new Panel();
-        testOne.setId(1);
-        testOne.setRow(5);
-        testOne.setColumn(9);
-        testOne.setSection("West");
-        testOne.setTracking(true);
-        testOne.setMaterial(PanelMaterial.CD_TE);
-        testOne.setYearInstalled(2011);
-        Panel testTwo = new Panel();
+    void shouldNotCreateDuplicate() throws DataAccessException {
 
-        testTwo.setId(2);
+        Panel testTwo = new Panel();
         testTwo.setRow(5);
         testTwo.setColumn(9);
         testTwo.setSection("West");
@@ -186,13 +179,12 @@ class PanelServiceTest {
         testTwo.setYearInstalled(2011);
 
         // should add the first test, should not add the section
-        PanelResult result = service.add(testOne);
-        PanelResult resultTwo = service.add(testTwo);
 
-        assertTrue(result.isSuccess());
-        assertFalse(resultTwo.isSuccess());
-        assertEquals(1, resultTwo.getMessages().size());
-        assertTrue(resultTwo.getMessages().get(0).contains("Duplicate"));
+        PanelResult result = service.add(testTwo);
+
+        assertFalse(result.isSuccess());
+        assertEquals(1, result.getMessages().size());
+        assertTrue(result.getMessages().get(0).contains("Duplicate"));
     }
 
     ////////////////////////////////////////   UPDATE  ////////////////////////////////////////////////
