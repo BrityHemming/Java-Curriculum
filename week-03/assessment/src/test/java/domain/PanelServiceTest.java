@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import javax.xml.crypto.Data;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,6 +21,19 @@ class PanelServiceTest {
     void setup() {
         PanelRepoDouble repo = new PanelRepoDouble();
         service = new PanelService(repo);
+    }
+
+    ////////////////////////////////////////  Find ////////////////////////////////////////////////
+    @Test
+    void shouldFindTwoNorthPanels() throws DataAccessException {
+        List<Panel> panels = service.findBySection("North");
+        assertEquals(2, panels.size());
+    }
+
+    @Test
+    void shouldFindPanelByExistingKey() throws DataAccessException {
+        Panel panel = service.findByKey(new PanelKey("South", 8, 8));
+        assertNotNull(panel);
     }
 
     // Input validation tests

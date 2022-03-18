@@ -15,21 +15,16 @@ public class PanelService {
     public PanelService(PanelRepo repo){
         this.repo = repo;
     }
-    //Rules for add
-    /*
-    can't be null
-    all info required
-    User must be able to select add panel from menu option
-    enter a section (string) // sections can hold 250 panels
-    enter a row (int 1-250)
-    enter a column (int 1 - 250)
-    make sure a panel does not already exist there
-    enter a material (choose from list) - this will be enum
-    enter the year installed
-    tracking (yes/no)
-    save panel
-    success or failure message
-    * */
+
+
+    /// FIND ////////
+    public List<Panel> findBySection(String section) throws DataAccessException {
+        return repo.findBySection(section);
+    }
+    public Panel findByKey(PanelKey key) throws DataAccessException {
+        return repo.findByKey(key);
+    }
+
 // ADD
     public PanelResult add(Panel panel) throws DataAccessException {
         PanelResult result = validateInputs(panel);
