@@ -126,6 +126,7 @@ public class PanelService {
         //The combined values of Section, Row, and Column may not be duplicated.
         if (result.isSuccess()) {
             Panel existingPanel = repo.findByKey(panel.getKey());
+            result.setPanel(panel);
 
             if (existingPanel != null && existingPanel.getId() != panel.getId()) {
                 result.addErrorMessage("Error Duplicate Panel - section, row, and column must be unique.");
