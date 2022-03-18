@@ -127,22 +127,17 @@ public class PanelFileRepo implements PanelRepo {
     }
 
     // DELETE
-    // we want to see if this was successful
     @Override
-    public boolean deleteById(int id) throws DataAccessException {
+    public boolean deleteByKey(PanelKey key) throws DataAccessException {
         List<Panel> all = findAll();
-        for(int i = 0; i < all.size(); i++){
-            if(all.get(i).getId() == id){
+        for (int i = 0; i < all.size(); i++) {
+            if (all.get(i).isMatch(key)) {
                 all.remove(i);
                 writeAll(all);
                 return true;
             }
         }
         return false;
-    }
-
-    public boolean deleteByKey(PanelKey key) throws DataAccessException {
-        return findByKey(key) != null;
     }
 
     // method to save for all data transforming

@@ -15,7 +15,7 @@ public class PanelRepoDouble implements PanelRepo{
         Panel testOne = new Panel(1,"North",5,6,2018,PanelMaterial.MONO_SI,true );
         Panel testTwo = new Panel(2, "South", 8, 8, 2010, PanelMaterial.POLY_SI, true);
         Panel testThree = new Panel(3,"East",35,10,2018,PanelMaterial.CD_TE,true );
-        Panel testFour = new Panel(4,"West",54,36,2018,PanelMaterial.CIGS,true );
+        Panel testFour = new Panel(4,"West",5,9,2018,PanelMaterial.CIGS,true );
         Panel testFive = new Panel(5,"North",105,26,2018,PanelMaterial.MONO_SI,true );
         panels.add(testOne);
         panels.add(testTwo);
@@ -64,15 +64,6 @@ public class PanelRepoDouble implements PanelRepo{
     }
 
     @Override
-    public boolean deleteById(int id) throws DataAccessException {
-        return false;
-    }
-
-    public boolean deleteByKey(PanelKey key) throws DataAccessException {
-        return findByKey(key) != null;
-    }
-
-    @Override
     public Panel findByKey(PanelKey key) throws DataAccessException {
         for (Panel p : panels) {
             if (p.isMatch(key)) {
@@ -81,4 +72,10 @@ public class PanelRepoDouble implements PanelRepo{
         }
         return null;
     }
+
+    @Override
+    public boolean deleteByKey(PanelKey key) throws DataAccessException {
+        return findByKey(key) != null;
+    }
+
 }

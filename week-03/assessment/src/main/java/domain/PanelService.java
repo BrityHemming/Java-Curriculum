@@ -3,7 +3,9 @@ package domain;
 import data.DataAccessException;
 import data.PanelRepo;
 import models.Panel;
+import models.PanelKey;
 
+import javax.xml.crypto.Data;
 import java.util.Date;
 import java.util.List;
 
@@ -82,6 +84,17 @@ public class PanelService {
         return result;
     }
 
+    // DELETE
+
+    public PanelResult deleteByKey(PanelKey key) throws DataAccessException {
+        PanelResult result = new PanelResult();
+        if (!repo.deleteByKey(key)) {
+            result.addErrorMessage("That key does not exist");
+        }
+        return result;
+    }
+
+    ////////VALIDATION
     private PanelResult validateInputs(Panel panel) throws DataAccessException {
         PanelResult result = new PanelResult();
         if(panel == null){

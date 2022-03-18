@@ -124,19 +124,26 @@ class PanelFileRepoTest {
 
     // DELETE
     @Test
-    void shouldDeleteExisting() throws DataAccessException{
-        boolean actual = repo.deleteById(2);
-        assertTrue(actual);
-
-        Panel p = repo.findById(2);
-        assertNull(p);
+    void shouldDeleteByKey() throws DataAccessException {
+        int count = repo.findBySection("West").size();
+        assertTrue(repo.deleteByKey(new PanelKey("West", 2, 3)));
+        assertFalse(repo.deleteByKey(new PanelKey("West", 120, 9)));
+        assertEquals(count - 1, repo.findBySection("West").size());
     }
-
-    @Test
-    void shouldNotDeleteMissing() throws DataAccessException{
-        boolean actual = repo.deleteById(100000);
-        assertFalse(actual);
-    }
+//    @Test
+//    void shouldDeleteExisting() throws DataAccessException{
+//        boolean actual = repo.deleteById(2);
+//        assertTrue(actual);
+//
+//        Panel p = repo.findById(2);
+//        assertNull(p);
+//    }
+//
+//    @Test
+//    void shouldNotDeleteMissing() throws DataAccessException{
+//        boolean actual = repo.deleteById(100000);
+//        assertFalse(actual);
+//    }
 
 
 

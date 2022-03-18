@@ -22,8 +22,7 @@ public interface PanelRepo {
     boolean update(Panel panel) throws DataAccessException;
 
     // DELETE
-    // we want to see if this was successful
-    boolean deleteById(int id) throws DataAccessException;
-
     Panel findByKey(PanelKey key) throws DataAccessException;
+
+    boolean deleteByKey(PanelKey key) throws DataAccessException;
 }

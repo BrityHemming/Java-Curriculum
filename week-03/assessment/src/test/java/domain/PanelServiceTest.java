@@ -3,6 +3,7 @@ package domain;
 import data.DataAccessException;
 import data.PanelRepoDouble;
 import models.Panel;
+import models.PanelKey;
 import models.PanelMaterial;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -210,4 +211,16 @@ class PanelServiceTest {
     }
 
     ////////////////////////////////////////   DELETE  ////////////////////////////////////////////////
+    @Test
+    void shouldDeletePanel() throws DataAccessException {
+        PanelResult result = service.deleteByKey(new PanelKey("North", 5, 6));
+        assertTrue(result.isSuccess());
+    }
+    @Test
+    void shouldNotDeleteNonExistingPanel() throws DataAccessException {
+        PanelResult result = service.deleteByKey(new PanelKey("West", 10, 105));
+        assertFalse(result.isSuccess());
+        assertEquals(1, result.getMessages().size());
+        assertTrue(result.getMessages().get(0).contains("key"));
+    }
 }
