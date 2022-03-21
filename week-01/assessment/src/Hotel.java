@@ -22,6 +22,8 @@ public class Hotel {
             // Welcome Message
             System.out.println("Welcome to the Grand Capsule Hotel!");
             //On start up, the application prompts the administrator for the hotel's capacity. The capacity determines how many capsules are available.
+            // FEEDBACK: You can remove the "0 - 50" here in the message that you're printing; the application should
+            // be able to support any number of capsules.
             System.out.print("Please enter the number of vacant capsules available for booking [0 - 50]:");
             // allow use to enter number - this sets the length of the array, once you declare the length it cannot be changed
             int vacantCapsules = Integer.parseInt(console.nextLine());
@@ -40,14 +42,19 @@ public class Hotel {
                 String menuOption = mainMenu(console);
                 // handle each menu option
                 switch(menuOption){
-                    case "1": guestCheckin(console, capsules);
+                    // FEEDBACK: It's common to use a new line after the cases ":".
+                    case "1":
+                        guestCheckin(console, capsules);
                         break;
-                    case "2": guestCheckout(console, capsules);
+                    case "2":
+                        guestCheckout(console, capsules);
                         break;
-                    case "3": guestList(capsules);
+                    case "3":
+                        guestList(capsules);
                         break;
                     // update exit boolean if user confirms logout
-                    case "4": exit = confirmExit(console);
+                    case "4":
+                        exit = confirmExit(console);
                         break;
                     default: System.out.printf("%s is not a valid menu item, please try again", menuOption);
                 }
@@ -56,7 +63,9 @@ public class Hotel {
             System.out.println();
             System.out.println("Goodbye for now!");
 
-        }// closes main method
+        }
+
+        // closes main method
         // Main Menu
         // display the menu
         // we are using static here so that the method belongs to the entire class - in otherwords we don't need to create an object to use it
@@ -84,8 +93,11 @@ public class Hotel {
             System.out.println("**************************");
             // allow user to choose a capsule by number
             System.out.print("Please choose the capsule number you would like to book: ");
+            // FEEDBACK: I'd encourage you to avoid abbreviations like "cap" and "num" in your variable names.
+            // "capsuleNumber" is a clearer variable name.
             int capNum = Integer.parseInt(console.nextLine());
             //check that the capsule is empty, if empty allow check in by entering guest's name
+            // FEEDBACK: Is this loop needed?
             for(int i = 0; i < capsules.length; i++){
                 if(capsules[capNum-1] == null){
                     //assign guest to capsule
@@ -141,6 +153,11 @@ public class Hotel {
             System.out.println("Guest List");
             System.out.println("**************************");
             // print out all guests and capsule numbers that are not null
+            // FEEDBACK: The requirement is to implement a sliding viewing window of 11 capsules:
+            // displaying the 5 below, 5 above, the user's provided capsule number.
+            // This gets a little tricky at if the user enters a capsule number that's too close
+            // to either end of the array.
+            // Display "unoccupied" for any empty capsule.
             for(int x = 0; x < capsules.length; x++){
                 if(capsules[x] != null){
                     System.out.printf("capsule number: %s, Guest Name: %s",x+1, capsules[x]);
