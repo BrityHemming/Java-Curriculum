@@ -13,6 +13,8 @@ import java.util.Scanner;
 public class Controller implements GameController {
     private Scanner console = new Scanner(System.in);
 
+    // FEEDBACK: Try using IntelliJ's auto formatting (Code > Reformat Code or CTRL+ALT+L) to fix your code's indentation.
+
 // build constructor
 public Controller(Scanner console) {
     this.console = console;
@@ -20,6 +22,7 @@ public Controller(Scanner console) {
 
 // starts game. If the game is over, asks the user if they would like to play again
     @Override
+    // FEEDBACK This is the only method that needs to be public; all other methods in this class can be private to this class.
     public void setUp() {
         System.out.println("Gomoku");
         System.out.println("**********************");
@@ -55,6 +58,7 @@ public Controller(Scanner console) {
                 break;
             case 2:
                 player = new RandomPlayer();
+                // FEEDBACK: Maybe include the player number here (i.e. "Player 1's name is ...").
                 System.out.println("The player is " + player.getName());
                 System.out.println();
                 break;
@@ -68,6 +72,7 @@ public Controller(Scanner console) {
 
     @Override
     public void play() {
+        // FEEDBACK: Good use of the Player interface here.
         // setting players from user imputs
         Player player1 = getPlayer(console, 1);
         Player player2 = getPlayer(console, 2);
@@ -94,6 +99,8 @@ public Controller(Scanner console) {
             gameBoard.renderBoard();
         }
 
+        // FEEDBACK: It's super rare, but it is possible for the game to end in a draw.
+        // Correctly handle a draw isn't something that I'd expect to see from most trainees.
         Player winner = game.getWinner();
         // when the game is over print out the winner
         System.out.printf("%s Wins!%n", winner.getName());
@@ -133,6 +140,8 @@ public Controller(Scanner console) {
             // check to make sure that the result was successful if it was not successful prompt the player to choose again
             if (!result.isSuccess()) {
                 System.out.println();
+                // FEEDBACK: I'd just print the result message here instead of hard coding the message "that space has already been chosen"
+                // as the actual error might be something other than an occupied space on the board.
                 System.out.printf("Sorry, that space has already been chosen, please choose again: %s%n", result.getMessage());
                 System.out.println();
             }

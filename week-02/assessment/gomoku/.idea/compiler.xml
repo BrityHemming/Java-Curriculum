@@ -6,9 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="assessment" />
-        <module name="solarFarmSolution" />
+        <module name="gomoku" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="gomoku" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
