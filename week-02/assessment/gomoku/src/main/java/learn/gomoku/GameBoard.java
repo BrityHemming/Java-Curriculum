@@ -5,6 +5,9 @@ import learn.gomoku.game.Stone;
 public class GameBoard {
 
     private final int width;
+    // FEEDBACK: Using a 2D array to track the placed stones is a good approach but it's not the only solution.
+    // You can also simply retrieve the list of placed stones from the Gomoku object using the getStones() method
+    // and check that list for placed stones when printing the board.
     private final Stone[][] board;
 
    // create game board object
