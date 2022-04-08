@@ -62,6 +62,7 @@ public Panel addPanel() {
     result.setRow(readInt("Row", 1, 250));
     result.setColumn(readInt("Column", 1, 250));
     result.setMaterial(displayAndSelectMaterial(PanelMaterial.class));
+    // FEEDBACK: You could use LocalDate.now.getYear() for the max value here.
     result.setYearInstalled(readInt("Year Installed", 1980, 2022));
     result.setTracking(readBoolean("Tracked [yes/no]"));
 
@@ -79,6 +80,7 @@ public Panel updatePanel(Panel panel) {
     result.setRow(panel.getRow());
     result.setColumn(panel.getColumn());
     result.setMaterial(displayAndSelectMaterial(PanelMaterial.class));
+    // FEEDBACK: You could use LocalDate.now.getYear() for the max value here.
     result.setYearInstalled(readInt("Year Installed", 1980, 2022));
     result.setTracking(readBoolean("Tracked [yes/no]"));
 
@@ -128,6 +130,7 @@ public Panel updatePanel(Panel panel) {
 
         return result;
     }
+    // FEEDBACK: Nice helper method!
     private PanelMaterial displayAndSelectMaterial(Class<PanelMaterial> material){
         PanelMaterial[] materials = PanelMaterial.values();
         System.out.println("Please select your panel material");

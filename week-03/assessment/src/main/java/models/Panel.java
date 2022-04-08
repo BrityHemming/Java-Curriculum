@@ -9,6 +9,10 @@ public class Panel {
     private int yearInstalled;
     private PanelMaterial material;
     private boolean isTracking;
+    // FEEDBACK: Using a PanelKey class to represent a panel's key is an advanced technique that
+    // I wouldn't expect trainees to be comfortable with using. I regret using it in my own assessment solution.
+    // I literally have a task on my todo list to simplify my solution so that I don't unduly influence
+    // anyone's thought process on this assessment.
     private PanelKey key;
 
     // constuctors

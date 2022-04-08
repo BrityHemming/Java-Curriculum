@@ -44,6 +44,11 @@ public class Controller {
         view.printHeader(MenuOptions.DISPLAY_PANELS.getTitle());
         String section = view.getSection();
         List<Panel> panels = service.findBySection(section);
+        // FEEDBACK: You can't use System.out at all in the controller.
+        // While you could replace System.out with a view.displayMessage() method call,
+        // I'd recommend moving your check that the list is empty and message printing
+        // into the view.displayPanels() method. That would keep your controller
+        // method simpler overall (which is generally a good thing).
         if (panels.size() == 0) {
             System.out.print("There are no panels in this section");
         } else {
@@ -54,6 +59,12 @@ public class Controller {
         view.printHeader(MenuOptions.ADD_PANEL.getTitle());
         Panel panel = view.addPanel();
         PanelResult result = service.add(panel);
+        // FEEDBACK: I'd follow the example laid out by the Memories app from the lessons:
+//        if (result.isSuccess()) {
+//            view.displayMessage("Memory " + result.getMemory().getId() + " created.");
+//        } else {
+//            view.displayErrors(result.getErrorMessages());
+//        }
         if (result.isSuccess()) {
             System.out.printf("Your panel was created successfully!%n Panel %s added.", result.getPanel().getKey());
         } else {
@@ -72,12 +83,14 @@ public class Controller {
             updatedPanel.setRow(panel.getRow());
             updatedPanel.setColumn(panel.getColumn());
             PanelResult result = service.update(updatedPanel);
+            // FEEDBACK: As above, use the Memories app example here.
             if (result.isSuccess()) {
                 System.out.printf("Your panel was successfully updated.%n Panel %s updated.", result.getPanel().getKey());
             } else {
                 System.out.println(result.getMessages());
             }
         } else {
+            // FEEDBACK: Switch to using view.displayMessage()
             System.out.println("A panel with that key does not exist");
         }
 
@@ -88,12 +101,14 @@ public class Controller {
         Panel panel = service.findByKey(key);
         if (panel != null) {
             PanelResult result = service.deleteByKey(key);
+            // FEEDBACK: As above, use the Memories app example here.
             if (result.isSuccess()) {
                 System.out.printf("Your panel was successfully deleted.%n Panel %s no longer exists.", key);
             } else {
                 System.out.println(result.getMessages());
             }
         } else {
+            // FEEDBACK: Switch to using view.displayMessage()
             System.out.println("A panel with that key does not exist");
         }
     }

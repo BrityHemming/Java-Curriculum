@@ -11,7 +11,7 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
-
+// FEEDBACK: I'd recommend spelling out repository here... so PanelFileRepository for the class name.
 public class PanelFileRepo implements PanelRepo {
     // don't want to hardcode file paths here - we want to be flexible
     private final String filePath;
@@ -126,6 +126,8 @@ public class PanelFileRepo implements PanelRepo {
         return false;
     }
 
+    // FEEDBACK: Since your update method is using the panel ID to find the panel to update
+    // I'd update this delete method to be consistent in its approach... so change it to a deleteById() method.
     // DELETE
     @Override
     public boolean deleteByKey(PanelKey key) throws DataAccessException {

@@ -77,6 +77,9 @@ class PanelServiceTest {
 
         assertFalse(result.isSuccess());
         assertEquals(1, result.getMessages().size());
+        // FEEDBACK: Trainees won't often do it, but we can add another assertion to ensure
+        // that we actually got back the expected error message.
+//        assertEquals("The Section is required", result.getMessages().get(0));
     }
 
     @Test
@@ -92,6 +95,7 @@ class PanelServiceTest {
         PanelResult result = service.add(testOne);
 
         assertFalse(result.isSuccess());
+        // FEEDBACK: Why are there two error messages here?
         assertEquals(2, result.getMessages().size());
     }
 
@@ -111,6 +115,7 @@ class PanelServiceTest {
 
         assertFalse(result.isSuccess());
         assertEquals(1, result.getMessages().size());
+        // FEEDBACK: Nice check!
         assertTrue(result.getMessages().get(0).contains("Row"));
     }
 
