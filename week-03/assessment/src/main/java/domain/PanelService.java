@@ -6,6 +6,7 @@ import models.Panel;
 import models.PanelKey;
 
 import javax.xml.crypto.Data;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -51,6 +52,12 @@ public class PanelService {
             result.addErrorMessage("id is required.");
             return result;
         }
+
+        // FEEDBACK: The assessment instructions seem to suggest that using a panel's natural key
+        // (section-row-column) is the preferred way to identify panels in this project, but I steer
+        // trainees away from doing this, as it's more complicated than just using arbitrary IDs (i.e. 1, 2, 3, etc.)
+        // Also, using IDs allows the end user to edit a panel's section, row, and/or column.
+
         // cannot update section row or column or ID
         Panel existing = repo.findById(panel.getId());
         if(existing == null){
@@ -97,10 +104,14 @@ public class PanelService {
             return result;
         }
 
+        // FEEDBACK: You can also use the String isBlank() method to check if a string value
+        // is an empty string or contains whitespace characters only.
         // section must not be null
         if(panel.getSection() == null || panel.getSection().trim().length() == 0){
             result.addErrorMessage("The Section is required");
         }
+        // FEEDBACK: Change the error messages here to "Row must be between 1 and 250"
+        // and "Column must be between 1 and 250".
         // row and column need to be between 0 and 250
         if(panel.getRow() <= 0 || panel.getRow() > 250){
             result.addErrorMessage("Row must be between 0 and 250");
@@ -108,6 +119,7 @@ public class PanelService {
         if(panel.getColumn() <= 0 || panel.getColumn() > 250){
             result.addErrorMessage("Column must be between 0 and 250");
         }
+        // FEEDBACK: Use LocalDate.now().getYear() to get the current year.
         // year installed must be in the past
         Date today = new Date();
         int year = today.getYear() + 1900;
@@ -118,6 +130,8 @@ public class PanelService {
         if(panel.getMaterial() == null){
             result.addErrorMessage("Material cannot be null");
         }
+        // FEEDBACK: Since a boolean field can only be true or false, there's no need to
+        // validate the isTracking field.
         //tracking is required
         if(panel.isTracking() == false){
             result.addErrorMessage("tracking is required");
@@ -126,6 +140,7 @@ public class PanelService {
         //The combined values of Section, Row, and Column may not be duplicated.
         if (result.isSuccess()) {
             Panel existingPanel = repo.findByKey(panel.getKey());
+            // FEEDBACK: There's no need to set the result panel here.
             result.setPanel(panel);
 
             if (existingPanel != null && existingPanel.getId() != panel.getId()) {

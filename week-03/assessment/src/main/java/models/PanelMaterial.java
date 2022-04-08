@@ -1,5 +1,6 @@
 package models;
 
+// FEEDBACK: Nice use of a stateful enum.
 public enum PanelMaterial {
     POLY_SI("Multicrystalline Silicon", "poly-Si"),
     MONO_SI("Monocrystalline Silicon", "mono-Si"),

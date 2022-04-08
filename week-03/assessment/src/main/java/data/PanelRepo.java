@@ -1,3 +1,5 @@
+// FEEDBACK: All child packages will start with the top level package name.
+// package learn.solarfarm.data;
 package data;
 
 import models.Panel;
